@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/stockmovie/static/css/main.6e22b230.chunk.css",
+    "main.js": "/stockmovie/static/js/main.92a789d4.chunk.js",
+    "main.js.map": "/stockmovie/static/js/main.92a789d4.chunk.js.map",
+    "runtime-main.js": "/stockmovie/static/js/runtime-main.f9c7961c.js",
+    "runtime-main.js.map": "/stockmovie/static/js/runtime-main.f9c7961c.js.map",
+    "static/css/2.4fe88e87.chunk.css": "/stockmovie/static/css/2.4fe88e87.chunk.css",
+    "static/js/2.6c674dfd.chunk.js": "/stockmovie/static/js/2.6c674dfd.chunk.js",
+    "static/js/2.6c674dfd.chunk.js.map": "/stockmovie/static/js/2.6c674dfd.chunk.js.map",
+    "static/js/3.c7d23528.chunk.js": "/stockmovie/static/js/3.c7d23528.chunk.js",
+    "static/js/3.c7d23528.chunk.js.map": "/stockmovie/static/js/3.c7d23528.chunk.js.map",
+    "index.html": "/stockmovie/index.html",
+    "static/css/2.4fe88e87.chunk.css.map": "/stockmovie/static/css/2.4fe88e87.chunk.css.map",
+    "static/css/main.6e22b230.chunk.css.map": "/stockmovie/static/css/main.6e22b230.chunk.css.map",
+    "static/js/2.6c674dfd.chunk.js.LICENSE.txt": "/stockmovie/static/js/2.6c674dfd.chunk.js.LICENSE.txt",
+    "static/media/404.5fa4aa4b.gif": "/stockmovie/static/media/404.5fa4aa4b.gif",
+    "static/media/bg-not-found.18da2e43.jpg": "/stockmovie/static/media/bg-not-found.18da2e43.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f9c7961c.js",
+    "static/css/2.4fe88e87.chunk.css",
+    "static/js/2.6c674dfd.chunk.js",
+    "static/css/main.6e22b230.chunk.css",
+    "static/js/main.92a789d4.chunk.js"
+  ]
+}
