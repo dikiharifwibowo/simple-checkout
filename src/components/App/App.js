@@ -6,6 +6,7 @@ import './App.css';
 import styled from 'styled-components';
 import BreadCrumbs from '../elements/BreadCrumb/BreadCrumbs';
 import Summary from '../Summary/Summary';
+import DeliveryDetails from '../DeliveryDetails/DeliveryDetails';
 
 const Container = styled.section`
 background: #FFFFFF;
@@ -26,10 +27,14 @@ justify-content-space-between`;
 const ItemLeft = styled.div`
 padding: 20px 30px 0px 40px;
 flex-grow: 1;
-padding-bottom: 20px;`;
+padding-bottom: 20px;
+display: flex;
+flex-basis: 65%;
+flex-direction: column;
+flex-grow: 2;`;
 
 const ItemRight = styled.div`
-flex-basis:300px;
+flex-basis:35%;
 height: 100%;
 display: flex;
 flex-direction: column;
@@ -46,7 +51,7 @@ class App extends Component {
                         <BreadCrumbs></BreadCrumbs>
                         <Content>
                             <ItemLeft>
-                                
+                                <DeliveryDetails></DeliveryDetails>
                             </ItemLeft>
                             <ItemRight>
                                 <Summary></Summary>
