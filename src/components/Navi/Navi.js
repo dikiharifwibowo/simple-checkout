@@ -24,6 +24,7 @@ width: 30px;
 height: 30px;
 display: flex;
 justify-content: center;
+opacity: ${ props => props.opacity || '0.2' };
 color: #ffffff;
 align-items: center;`;
 
@@ -51,7 +52,7 @@ const Navi = () => {
             <WrapperNav>
                 <Step>
                     <Flex>
-                        <Circle>1</Circle>
+                        <Circle opacity="1">1</Circle>
                         <Title>Delivery </Title>
                     </Flex>
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"

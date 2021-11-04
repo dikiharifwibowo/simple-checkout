@@ -5,8 +5,8 @@ import './App.css';
 import styled from 'styled-components';
 import BreadCrumbs from '../elements/BreadCrumb/BreadCrumbs';
 import Summary from '../Summary/Summary';
-import DeliveryDetails from '../DeliveryDetails/DeliveryDetails';
 import Navi from '../Navi/Navi';
+import Delivery from '../Delivery/Delivery';
 
 const Container = styled.section`
 background: #FFFFFF;
@@ -24,22 +24,6 @@ flex-wrap: nowrap;
 margin-bottom: 20px;
 justify-content-space-between`;
 
-const ItemLeft = styled.div`
-padding: 20px 30px 0px 40px;
-flex-grow: 1;
-padding-bottom: 20px;
-display: flex;
-flex-basis: 65%;
-flex-direction: column;
-flex-grow: 2;`;
-
-const ItemRight = styled.div`
-flex-basis:35%;
-height: 100%;
-display: flex;
-flex-direction: column;
-padding-bottom: 20px;`;
-
 class App extends Component {
 
     render() {
@@ -51,12 +35,7 @@ class App extends Component {
                         <Navi></Navi>
                         <BreadCrumbs></BreadCrumbs>
                         <Content>
-                            <ItemLeft>
-                                <DeliveryDetails></DeliveryDetails>
-                            </ItemLeft>
-                            <ItemRight>
-                                <Summary></Summary>
-                            </ItemRight>     
+                            <Delivery></Delivery>
                         </Content>
                     </Container>
                     {/* <Switch>
