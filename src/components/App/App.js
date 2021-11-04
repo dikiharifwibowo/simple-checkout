@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from '../Home/Home';
 import NotFound from '../NotFound/NotFound';
 import './App.css';
 import styled from 'styled-components';
 import BreadCrumbs from '../elements/BreadCrumb/BreadCrumbs';
 import Summary from '../Summary/Summary';
 import DeliveryDetails from '../DeliveryDetails/DeliveryDetails';
+import Navi from '../Navi/Navi';
 
 const Container = styled.section`
 background: #FFFFFF;
@@ -48,6 +48,7 @@ class App extends Component {
             <Router>
                 <React.Fragment>
                     <Container>
+                        <Navi></Navi>
                         <BreadCrumbs></BreadCrumbs>
                         <Content>
                             <ItemLeft>

@@ -89,7 +89,7 @@ const Summrary = () => {
                         <Heading marginTop="1rem" marginBottom="1rem">Total</Heading>
                         <Heading marginTop="1rem" marginBottom="1rem">505,900</Heading>
                     </Item>
-                    <Button>Continou to Payment</Button>
+                    <Button>Continue to Payment</Button>
                 </Bottom>
             </Wrapper>
         </React.Fragment>
