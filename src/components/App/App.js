@@ -7,6 +7,7 @@ import BreadCrumbs from '../elements/BreadCrumb/BreadCrumbs';
 import Summary from '../Summary/Summary';
 import Navi from '../Navi/Navi';
 import Delivery from '../Delivery/Delivery';
+import Shipment from '../Shipment/Shipment';
 
 const Container = styled.section`
 background: #FFFFFF;
@@ -35,7 +36,9 @@ class App extends Component {
                         <Navi></Navi>
                         <BreadCrumbs></BreadCrumbs>
                         <Content>
-                            <Delivery></Delivery>
+                            {/* <Delivery></Delivery> */}
+                            {/* <Shipment></Shipment> */}
+                            <Summary></Summary>
                         </Content>
                     </Container>
                     {/* <Switch>

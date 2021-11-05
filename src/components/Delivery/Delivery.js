@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
-import Summary from '../Summary/Summary';
 import { useForm } from 'react-hook-form';
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -38,6 +37,8 @@ font-style: normal;
 font-weight: bold;
 font-size: 36px;
 line-height: 44px;
+border-bottom: 4px solid #EEEEEE;
+min-width: 200px;
 color: #FF8A00;
 margin-top: 0px;`;
 
@@ -154,8 +155,6 @@ font-weight: bold;`;
 const ContentForm = styled.form`
 display: flex;`;
 
-const phoneRegExp = /^[0-9\- ]{8,14}$/
-
 const schema = yup.object().shape({
     email: yup.string().email('Email is invalid').required('Email is required'),
     phone: yup.string().matches(new RegExp('[0-9]{7}')),
@@ -185,7 +184,6 @@ const Delivery = () => {
     }
 
     const onSubmitHandler = (data) => {
-        console.log({ data });
         setEmail(data.email);
         setPhone(data.phone);
         setAddress(data.address);
