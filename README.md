@@ -1,13 +1,13 @@
+
+##Keterangan program
+Stack yang digunakan untuk membangun project diantaranya adalah : React-hooks, react-hooks-form, dan styled-components, \
+selain itu ada juga redux untuk state management. anda bisa melihat package.json untuk library yang digunakan.\n
+Untuk functionalitas sudah jalan. anda bisa melihat video pendek di link berikut untuk melihat gambaran sekilas project yang telah diselesaikan\
+link : https://drive.google.com/drive/folders/1OiVfF0hyzVvCYmTsC-D1u7XH8NdusEEv?usp=
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-
-##Keterangan program
-Stack yang digunakan untuk membangun project diantaranya adalah : React-hooks, react-hooks-form, dan styled-components, 
-selain itu ada juga redux untuk state management. anda bisa melihat package.json untuk library yang digunakan.
-
-
 ## Available Scripts
 
 In the project directory, you can run:
