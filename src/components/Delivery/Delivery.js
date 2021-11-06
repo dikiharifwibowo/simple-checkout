@@ -165,8 +165,8 @@ const Delivery = ({dropshipFee, handleChangePageShipment, enableDropship, disabl
 
     const schema = yup.object().shape({
         email: yup.string().email('Email is invalid').required('Email is required'),
-        phone: yup.string().matches(new RegExp('[0-9]{7}')).required(),
-        address: yup.string().min(6).max(20).required(),
+        phone: yup.string().min(6).max(20).matches(new RegExp('[0-9]{7}')).required(),
+        address: yup.string().max(120).required(),
         name: !dropshipper ? yup.string().required() : yup.string(),
         dropshipPhone: !dropshipper ? yup.string().matches(new RegExp('[0-9]{7}')).required() : yup.string().matches(new RegExp('[0-9]{7}')),
       });
