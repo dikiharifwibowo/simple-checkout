@@ -35,10 +35,10 @@ const Heading = styled.h1`
 font-family: Montserrat;
 font-style: normal;
 font-weight: bold;
-font-size: 36px;
+font-size: ${ props => props.fontSize || '32px' };
 line-height: 44px;
 border-bottom: 4px solid #EEEEEE;
-min-width: 200px;
+width: ${ props => props.width || '260px' };
 color: #FF8A00;
 margin-top: 0px;`;
 
@@ -215,7 +215,7 @@ const Delivery = ({dropshipFee, handleChangePageShipment, enableDropship, disabl
                 <ItemRight>
                     <Wrapper>
                         <Top>
-                            <Heading>Summary</Heading>
+                            <Heading fontSize="24px" width="130px">Summary</Heading>
                             <ItemPurchased>10 items purchased</ItemPurchased>
                         </Top>
                         <Bottom>

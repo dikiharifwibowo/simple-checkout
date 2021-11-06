@@ -26,13 +26,12 @@ const Heading = styled.h1`
 font-family: Montserrat;
 font-style: normal;
 font-weight: bold;
-font-size: 36px;
-margin-top: ${ props => props.marginTop || '0' };
+font-size: ${ props => props.fontSize || '32px' };
 line-height: 44px;
 border-bottom: 4px solid #EEEEEE;
-width: 200px;
-color: #FF8A00;
-margin-top: 0px;`;
+width: ${ props => props.width || '260px' };
+margin-top: ${ props => props.marginTop || '0' };
+color: #FF8A00;`;
 
 const TotalCost = styled.h2`
 font-family: Montserrat;
@@ -160,7 +159,7 @@ const Summary = ({shipment,shipmentFee, deliveryEstimation, paymentMethod, drops
             <ItemRight>
                 <Wrapper>
                     <Top>
-                        <Heading marginTop="2rem">Summary</Heading>
+                        <Heading marginTop="2rem" fontSize="24px" width="130px">Summary</Heading>
                         <ItemPurchased>10 items purchased</ItemPurchased>
                         <Hr></Hr>
                         <DeliveryEstimation>Delivery Estimation</DeliveryEstimation>
