@@ -164,7 +164,6 @@ const Summary = () => {
                             <TotalCost marginTop="1rem" marginBottom="1rem">Total</TotalCost>
                             <TotalCost marginTop="1rem" marginBottom="1rem">505,900</TotalCost>
                         </Item>
-                        <Button type="submit">Continue to Payment</Button>
                     </Bottom>
                 </Wrapper>
             </ItemRight> 

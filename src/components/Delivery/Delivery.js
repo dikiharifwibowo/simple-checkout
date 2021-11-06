@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
+import {connect} from 'react-redux';
 const ItemLeft = styled.div`
 padding: 20px 30px 0px 40px;
 flex-grow: 1;
@@ -162,7 +162,7 @@ const schema = yup.object().shape({
   });
 
 
-const Delivery = () => {
+const Delivery = ({page, handleChangePageShipment}) => {
     const [email, setEmail] = useState("John@gmail.com");
     const [phone, setPhone] = useState("123456789012");
     const [address, setAddress] = useState("yogyakarta");
@@ -187,6 +187,7 @@ const Delivery = () => {
         setEmail(data.email);
         setPhone(data.phone);
         setAddress(data.address);
+        handleChangePageShipment();
     };
     return (
         <React.Fragment>
@@ -236,4 +237,14 @@ const Delivery = () => {
     )
 }
 
-export default Delivery;
+const mapStateToProps = (state) => {
+    return {
+        page: state.page
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleChangePageShipment: (param) => dispatch({ type: 'CHANGE_PAGE_SHIPMENT' }),
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Delivery);

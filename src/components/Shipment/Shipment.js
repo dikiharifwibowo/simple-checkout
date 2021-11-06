@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
+import { connect } from "react-redux";
 
 const ItemLeft = styled.div`
 padding: 20px 30px 0px 40px;
@@ -163,7 +164,7 @@ line-height: 19px;
 color: #1BD97B;`;
 
 
-const Shipment = () => {
+const Shipment = ({handleChangePageSummary}) => {
     const [courier, setCourier] = useState(false);
     const [payment, setPayment] = useState(false);
     const [gosend, setGoSend] = useState(false);
@@ -323,12 +324,16 @@ const Shipment = () => {
                             <TotalCost marginTop="1rem" marginBottom="1rem">Total</TotalCost>
                             <TotalCost marginTop="1rem" marginBottom="1rem">505,900</TotalCost>
                         </Item>
-                        <Button type="submit">{ payment ? payment : "Pay with ..." }</Button>
+                        <Button onClick={ handleChangePageSummary }>{ payment ? payment : "Pay with ..." }</Button>
                     </Bottom>
                 </Wrapper>
             </ItemRight> 
         </React.Fragment>
     )
 }
-
-export default Shipment;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleChangePageSummary: (param) => dispatch({ type: 'CHANGE_PAGE_SUMMARY' }),
+    }
+}
+export default connect(null, mapDispatchToProps)(Shipment);

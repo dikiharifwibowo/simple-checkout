@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NotFound from '../NotFound/NotFound';
 import './App.css';
@@ -8,6 +8,7 @@ import Summary from '../Summary/Summary';
 import Navi from '../Navi/Navi';
 import Delivery from '../Delivery/Delivery';
 import Shipment from '../Shipment/Shipment';
+import {connect} from 'react-redux';
 
 const Container = styled.section`
 background: #FFFFFF;
@@ -26,7 +27,6 @@ margin-bottom: 20px;
 justify-content-space-between`;
 
 class App extends Component {
-
     render() {
 
         return (
@@ -36,9 +36,9 @@ class App extends Component {
                         <Navi></Navi>
                         <BreadCrumbs></BreadCrumbs>
                         <Content>
-                            {/* <Delivery></Delivery> */}
-                            {/* <Shipment></Shipment> */}
-                            <Summary></Summary>
+                            { this.props.page === 'delivery' ? <Delivery></Delivery> : null  }
+                            { this.props.page === 'shipment' ? <Shipment></Shipment> : null  }
+                            { this.props.page === 'summary' ? <Summary></Summary> : null  }
                         </Content>
                     </Container>
                     {/* <Switch>
@@ -51,4 +51,10 @@ class App extends Component {
     }
 
 }
-export default App;
+
+const mapStateToProps = (state) => {
+    return {
+        page: state.page
+    }
+}
+export default connect(mapStateToProps)(App);
