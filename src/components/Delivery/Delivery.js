@@ -155,30 +155,34 @@ font-weight: bold;`;
 const ContentForm = styled.form`
 display: flex;`;
 
-const schema = yup.object().shape({
-    email: yup.string().email('Email is invalid').required('Email is required'),
-    phone: yup.string().matches(new RegExp('[0-9]{7}')),
-    address: yup.string().min(6).max(20).required(),
-  });
-
-
 const Delivery = ({page, handleChangePageShipment}) => {
     const [email, setEmail] = useState("John@gmail.com");
     const [phone, setPhone] = useState("123456789012");
     const [address, setAddress] = useState("yogyakarta");
+    const [name, setName] = useState("dikiharifwibowo");
+    const [dropshipPhone, setDropshipPhone] = useState("1234567890");
     const [dropshippingFee, setDropshippingFee] = useState("0");
-    const [dropshipper, setDropshipper] = useState(false);
+    const [dropshipper, setDropshipper] = useState(true);
 
+    const schema = yup.object().shape({
+        email: yup.string().email('Email is invalid').required('Email is required'),
+        phone: yup.string().matches(new RegExp('[0-9]{7}')).required(),
+        address: yup.string().min(6).max(20).required(),
+        name: !dropshipper ? yup.string().required() : yup.string(),
+        dropshipPhone: !dropshipper ? yup.string().matches(new RegExp('[0-9]{7}')).required() : yup.string().matches(new RegExp('[0-9]{7}')),
+      });
+
+      
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
     });
 
     let handleChangeDropshipper = (e) => {
         if(e.target.checked) { 
-            setDropshipper(true) 
-            setDropshippingFee('5,900') 
+            setDropshipper(false) 
+            setDropshippingFee('5,900')
         } else { 
-            setDropshipper(false)  
+            setDropshipper(true)  
             setDropshippingFee('0') 
         }
     }
@@ -202,9 +206,9 @@ const Delivery = ({page, handleChangePageShipment}) => {
 
                     <WrapperForm>
                         <Form percent="60%"><Input {...register("email")} marginRight="30px" placeholder="Email"></Input> </Form>
-                        <Form><Input disabled = {(dropshipper)? "disabled" : ""} placeholder="Dropshipper name"></Input> </Form>
+                        <Form><Input disabled = {(dropshipper)? "disabled" : ""}  {...register("name")}  placeholder="Dropshipper name"></Input> </Form>
                         <Form percent="60%"><Input {...register("phone")} marginRight="30px" placeholder="Phone number"></Input> </Form>
-                        <Form><Input disabled = {(dropshipper)? "disabled" : ""} placeholder="Dropshipper number"></Input> </Form>
+                        <Form><Input disabled = {(dropshipper)? "disabled" : ""}  {...register("dropshipPhone")}  placeholder="Dropshipper number"></Input> </Form>
                         <Form percent="60%"><TextArea {...register("address")} marginRight="30px" placeholder="Delivery Address"></TextArea> </Form>
                         <Form></Form>
                     </WrapperForm>

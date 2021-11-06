@@ -8,6 +8,7 @@ margin-top: 30px;`;
 
 const Link = styled.a`
 display: flex;
+margin-top: 2rem;
 font-style: normal;
 font-weight: normal;
 font-size: 14px;

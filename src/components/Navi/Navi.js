@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 const WrapperNav = styled.div`
 background: #FFFAE6;
@@ -47,7 +48,7 @@ color: #FF8A00;`;
 const Flex = styled.div`
 display: flex;`;
 
-const Navi = () => {
+const Navi = ({page}) => {
         return (
             <WrapperNav>
                 <Step>
@@ -67,7 +68,7 @@ const Navi = () => {
                 </Step>
                 <Step>
                     <Flex>
-                        <Circle>2</Circle>
+                        <Circle opacity={ (page === 'shipment' || page === 'summary')  ? '1' : '0.2'}>2</Circle>
                         <Title>Payment</Title>
                     </Flex>
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +84,7 @@ const Navi = () => {
 
                 <Step>
                     <Flex>
-                        <Circle>3</Circle>
+                        <Circle opacity={ page === 'summary' ? '1' : '0.2'}>3</Circle>
                         <Title>Finish</Title>
                     </Flex>
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -100,5 +101,9 @@ const Navi = () => {
             </WrapperNav>
         )
 }
-
-export default Navi;
+const mapStateToProps = (state) => {
+    return {
+        page: state.page
+    }
+}
+export default connect(mapStateToProps)(Navi);

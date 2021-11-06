@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
-import { useForm } from 'react-hook-form';
 import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import back from './arrow.svg'
+import { connect } from "react-redux";
 
 const ItemLeft = styled.div`
 padding: 20px 30px 0px 40px;
@@ -121,6 +121,18 @@ margin-top: 10px;
 line-height: 19px;
 color: #1BD97B;`;
 
+const Link = styled.div`
+display: flex;
+font-style: normal;
+font-weight: normal;
+margin-top: 2rem;
+font-size: 14px;
+line-height: 17px;
+color: #000000;
+opacity: 0.6;`;
+
+const Span = styled.div`
+margin-left: 10px;`;
 
 const schema = yup.object().shape({
     email: yup.string().email('Email is invalid').required('Email is required'),
@@ -129,7 +141,7 @@ const schema = yup.object().shape({
   });
 
 
-const Summary = () => {
+const Summary = ({handleChangePageDelivery}) => {
     const [courier, setCourier] = useState(false);
     const [dropshippingFee, setDropshippingFee] = useState("0");
 
@@ -140,6 +152,10 @@ const Summary = () => {
                     <Heading>Thank You</Heading>
                     <div>Order ID : <span style={{fontWeight: "bold"}}>asdb1762</span></div>
                     <div>Your order will be delivered today with GO-SEND</div>
+                    <Link onClick={ handleChangePageDelivery }>
+                        <img src={back} alt = "back to cart"></img>
+                        <Span>Back to homepage</Span>  
+                    </Link>
                 </div>
             </ItemLeft>
             <ItemRight>
@@ -171,4 +187,10 @@ const Summary = () => {
     )
 }
 
-export default Summary;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleChangePageDelivery: (param) => dispatch({ type: 'CHANGE_PAGE_DELIVERY' }),
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Summary);

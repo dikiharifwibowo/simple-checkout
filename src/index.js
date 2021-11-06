@@ -25,6 +25,12 @@ const rootReducer = (state = globalState, action) => {
       page: 'summary'
     }
   }
+  if(action.type==="CHANGE_PAGE_DELIVERY") {
+    return {
+      ...state,
+      page: 'delivery'
+    }
+  }
   return state;
 }
 
