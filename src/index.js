@@ -8,7 +8,11 @@ import { createStore } from 'redux';
 import {Provider} from 'react-redux';
 
 const globalState = {
-  page: 'delivery'
+  page: 'delivery',
+  dropshipFee: '0',
+  shipment: false,
+  shipmentFee: '0',
+  payment: false
 }
 //reducer
 const rootReducer = (state = globalState, action) => {
@@ -29,6 +33,40 @@ const rootReducer = (state = globalState, action) => {
     return {
       ...state,
       page: 'delivery'
+    }
+  }
+  if(action.type==="ENABLE_DROPSHIP") {
+    return {
+      ...state,
+      dropshipFee: '5,900'
+    }
+  }
+  if(action.type==="DISABLE_DROPSHIP") {
+    return {
+      ...state,
+      dropshipFee: '0'
+    }
+  }
+  //Shipment
+  if(action.type==="SHIPMENT_GOJEK") {
+    return {
+      ...state,
+      shipment: 'GO SEND',
+      shipmentFee: '15,000',
+    }
+  }
+  if(action.type==="SHIPMENT_JNE") {
+    return {
+      ...state,
+      shipment: 'JNE',
+      shipmentFee: '9,000',
+    }
+  }
+  if(action.type==="SHIPMENT_PERSONAL") {
+    return {
+      ...state,
+      shipment: 'PERSONAL COURIER',
+      shipmentFee: '29,000',
     }
   }
   return state;

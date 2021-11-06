@@ -42,7 +42,6 @@ class App extends Component {
                         </Content>
                     </Container>
                     {/* <Switch>
-                        <Route exact path="/" component={Home} />
                         <Route component={NotFound} />
                     </Switch> */}
                 </React.Fragment>

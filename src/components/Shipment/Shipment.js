@@ -164,13 +164,12 @@ line-height: 19px;
 color: #1BD97B;`;
 
 
-const Shipment = ({handleChangePageSummary}) => {
+const Shipment = ({dropshipFee, handleChangePageSummary, shipment, shipmentFee, paymentMethod, shipmentGojek, shipmentJne, shipmentPersonal}) => {
     const [courier, setCourier] = useState(false);
     const [payment, setPayment] = useState(false);
     const [gosend, setGoSend] = useState(false);
     const [jne, setJne] = useState(false);
     const [personalCourier, setPersonalCourier] = useState(false);
-    const [dropshippingFee, setDropshippingFee] = useState("0");
     const [eWallet, setEWallet] = useState(false);
     const [bankTransfer, setBankTransfer] = useState(false);
     const [va, setVa] = useState(false);
@@ -181,17 +180,21 @@ const Shipment = ({handleChangePageSummary}) => {
             setCourier("Today by GO SEND")
             setJne(false)
             setPersonalCourier(false)
+            shipmentGojek()
         } else if(value === 'jne') {
             setGoSend(false)
             setJne(true)
             setCourier("2 day by JNE")
             setPersonalCourier(false)
+            shipmentJne()
         } else {
             setGoSend(false)
             setJne(false)
             setPersonalCourier(true)
             setCourier("1 day by Personal Courier")
+            shipmentPersonal()
         }
+
     }
 
     let handlePayment = (value) => {
@@ -213,6 +216,10 @@ const Shipment = ({handleChangePageSummary}) => {
         }
     }
 
+    let handleShipmentPayment = () => {
+        if(!courier || !payment) return;
+        handleChangePageSummary()
+    }
     const Icon = () => {
         return <svg gosend={gosend} version="1.0" xmlns="http://www.w3.org/2000/svg"
             width="24.000000pt" height="16.000000pt" viewBox="0 0 12.000000 24.000000"
@@ -318,22 +325,37 @@ const Shipment = ({handleChangePageSummary}) => {
                         </Item>
                         <Item>
                             <ItemName>Dropshipping Fee</ItemName>
-                            <ItemValue>{dropshippingFee}</ItemValue>
+                            <ItemValue>{dropshipFee}</ItemValue>
+                        </Item>
+                        <Item>
+                            <ItemName>{ shipment } shipment</ItemName>
+                            <ItemValue>{ shipmentFee }</ItemValue>
                         </Item>
                         <Item>
                             <TotalCost marginTop="1rem" marginBottom="1rem">Total</TotalCost>
-                            <TotalCost marginTop="1rem" marginBottom="1rem">505,900</TotalCost>
+                            <TotalCost marginTop="1rem" marginBottom="1rem">{ dropshipFee != 0 ? '5,900' : '5,000' }</TotalCost>
                         </Item>
-                        <Button onClick={ handleChangePageSummary }>{ payment ? payment : "Pay with ..." }</Button>
+                        <Button onClick={ handleShipmentPayment }>{ payment ? payment : "Pay with ..." }</Button>
                     </Bottom>
                 </Wrapper>
             </ItemRight> 
         </React.Fragment>
     )
 }
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
     return {
-        handleChangePageSummary: (param) => dispatch({ type: 'CHANGE_PAGE_SUMMARY' }),
+        dropshipFee: state.dropshipFee,
+        shipment: state.shipment,
+        shipmentFee: state.shipmentFee,
+        paymentMethod: state.payment,
     }
 }
-export default connect(null, mapDispatchToProps)(Shipment);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleChangePageSummary: () => dispatch({ type: 'CHANGE_PAGE_SUMMARY' }),
+        shipmentGojek: () => dispatch({ type: 'SHIPMENT_GOJEK' }),
+        shipmentJne: () => dispatch({ type: 'SHIPMENT_JNE' }),
+        shipmentPersonal: () => dispatch({ type: 'SHIPMENT_PERSONAL' }),
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Shipment);

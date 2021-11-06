@@ -141,7 +141,7 @@ const schema = yup.object().shape({
   });
 
 
-const Summary = ({handleChangePageDelivery}) => {
+const Summary = ({dropshipFee, handleChangePageDelivery}) => {
     const [courier, setCourier] = useState(false);
     const [dropshippingFee, setDropshippingFee] = useState("0");
 
@@ -174,11 +174,11 @@ const Summary = ({handleChangePageDelivery}) => {
                         </Item>
                         <Item>
                             <ItemName>Dropshipping Fee</ItemName>
-                            <ItemValue>{ dropshippingFee }</ItemValue>
+                            <ItemValue>{ dropshipFee }</ItemValue>
                         </Item>
                         <Item>
                             <TotalCost marginTop="1rem" marginBottom="1rem">Total</TotalCost>
-                            <TotalCost marginTop="1rem" marginBottom="1rem">505,900</TotalCost>
+                            <TotalCost marginTop="1rem" marginBottom="1rem">{ dropshipFee != 0 ? '5,900' : '5,000' }</TotalCost>
                         </Item>
                     </Bottom>
                 </Wrapper>
@@ -187,10 +187,16 @@ const Summary = ({handleChangePageDelivery}) => {
     )
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
     return {
-        handleChangePageDelivery: (param) => dispatch({ type: 'CHANGE_PAGE_DELIVERY' }),
+        dropshipFee: state.dropshipFee,
     }
 }
 
-export default connect(null, mapDispatchToProps)(Summary);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleChangePageDelivery: () => dispatch({ type: 'CHANGE_PAGE_DELIVERY' }),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Summary);

@@ -155,13 +155,12 @@ font-weight: bold;`;
 const ContentForm = styled.form`
 display: flex;`;
 
-const Delivery = ({page, handleChangePageShipment}) => {
+const Delivery = ({dropshipFee, handleChangePageShipment, enableDropship, disableDropship}) => {
     const [email, setEmail] = useState("John@gmail.com");
     const [phone, setPhone] = useState("123456789012");
     const [address, setAddress] = useState("yogyakarta");
     const [name, setName] = useState("dikiharifwibowo");
     const [dropshipPhone, setDropshipPhone] = useState("1234567890");
-    const [dropshippingFee, setDropshippingFee] = useState("0");
     const [dropshipper, setDropshipper] = useState(true);
 
     const schema = yup.object().shape({
@@ -180,10 +179,10 @@ const Delivery = ({page, handleChangePageShipment}) => {
     let handleChangeDropshipper = (e) => {
         if(e.target.checked) { 
             setDropshipper(false) 
-            setDropshippingFee('5,900')
+            enableDropship()
         } else { 
             setDropshipper(true)  
-            setDropshippingFee('0') 
+            disableDropship() 
         }
     }
 
@@ -226,11 +225,11 @@ const Delivery = ({page, handleChangePageShipment}) => {
                             </Item>
                             <Item>
                                 <ItemName>Dropshipping Fee</ItemName>
-                                <ItemValue>{ dropshippingFee }</ItemValue>
+                                <ItemValue>{ dropshipFee }</ItemValue>
                             </Item>
                             <Item>
                                 <TotalCost marginTop="1rem" marginBottom="1rem">Total</TotalCost>
-                                <TotalCost marginTop="1rem" marginBottom="1rem">505,900</TotalCost>
+                                <TotalCost marginTop="1rem" marginBottom="1rem">{ dropshipFee != 0 ? '5,900' : '5,000' }</TotalCost>
                             </Item>
                             <Button type="submit">Continue to Payment</Button>
                         </Bottom>
@@ -243,12 +242,14 @@ const Delivery = ({page, handleChangePageShipment}) => {
 
 const mapStateToProps = (state) => {
     return {
-        page: state.page
+        dropshipFee: state.dropshipFee,
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleChangePageShipment: (param) => dispatch({ type: 'CHANGE_PAGE_SHIPMENT' }),
+        handleChangePageShipment: () => dispatch({ type: 'CHANGE_PAGE_SHIPMENT' }),
+        enableDropship: () => dispatch({ type: 'ENABLE_DROPSHIP' }),
+        disableDropship: () => dispatch({ type: 'DISABLE_DROPSHIP' }),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Delivery);
