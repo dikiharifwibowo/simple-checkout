@@ -164,9 +164,8 @@ line-height: 19px;
 color: #1BD97B;`;
 
 
-const Shipment = ({dropshipFee, handleChangePageSummary, shipment, shipmentFee, paymentMethod, shipmentGojek, shipmentJne, shipmentPersonal}) => {
-    const [courier, setCourier] = useState(false);
-    const [payment, setPayment] = useState(false);
+const Shipment = ({dropshipFee, handleChangePageSummary, shipment, shipmentFee, deliveryEstimation, 
+    paymentMethod, shipmentGojek, shipmentJne, shipmentPersonal, paymentEwallet, paymentBankTransfer, paymentVa}) => {
     const [gosend, setGoSend] = useState(false);
     const [jne, setJne] = useState(false);
     const [personalCourier, setPersonalCourier] = useState(false);
@@ -177,21 +176,18 @@ const Shipment = ({dropshipFee, handleChangePageSummary, shipment, shipmentFee, 
     let handleShipment = (value) => {
         if(value === 'gosend') {
             setGoSend(true)
-            setCourier("Today by GO SEND")
             setJne(false)
             setPersonalCourier(false)
             shipmentGojek()
         } else if(value === 'jne') {
             setGoSend(false)
             setJne(true)
-            setCourier("2 day by JNE")
             setPersonalCourier(false)
             shipmentJne()
         } else {
             setGoSend(false)
             setJne(false)
             setPersonalCourier(true)
-            setCourier("1 day by Personal Courier")
             shipmentPersonal()
         }
 
@@ -200,28 +196,28 @@ const Shipment = ({dropshipFee, handleChangePageSummary, shipment, shipmentFee, 
     let handlePayment = (value) => {
         if(value === 'eWallet') {
             setEWallet(true)
-            setPayment("Pay with e-Wallet")
             setBankTransfer(false)
             setVa(false)
+            paymentEwallet()
         } else if(value === 'bankTransfer') {
             setEWallet(false)
             setBankTransfer(true)
-            setPayment("Pay with Bank Transfer")
             setVa(false)
+            paymentBankTransfer()
         } else {
             setEWallet(false)
             setBankTransfer(false)
             setVa(true)
-            setPayment("Pay with Virtual Account")
+            paymentVa()
         }
     }
 
     let handleShipmentPayment = () => {
-        if(!courier || !payment) return;
+        if(!shipment || !paymentMethod) return;
         handleChangePageSummary()
     }
     const Icon = () => {
-        return <svg gosend={gosend} version="1.0" xmlns="http://www.w3.org/2000/svg"
+        return <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
             width="24.000000pt" height="16.000000pt" viewBox="0 0 12.000000 24.000000"
             preserveAspectRatio="xMidYMid meet">
         
@@ -315,7 +311,7 @@ const Shipment = ({dropshipFee, handleChangePageSummary, shipment, shipmentFee, 
                         <ItemPurchased>10 items purchased</ItemPurchased>
                         <Hr></Hr>
                         <DeliveryEstimation>Delivery Estimation</DeliveryEstimation>
-                        { courier ?  <TimeEstimation>{ courier }</TimeEstimation> : null }
+                        { shipment ?  <TimeEstimation>{ deliveryEstimation +` by `+ shipment}</TimeEstimation> : null }
                        
                     </Top>
                     <Bottom>
@@ -335,7 +331,7 @@ const Shipment = ({dropshipFee, handleChangePageSummary, shipment, shipmentFee, 
                             <TotalCost marginTop="1rem" marginBottom="1rem">Total</TotalCost>
                             <TotalCost marginTop="1rem" marginBottom="1rem">{ dropshipFee != 0 ? '5,900' : '5,000' }</TotalCost>
                         </Item>
-                        <Button onClick={ handleShipmentPayment }>{ payment ? payment : "Pay with ..." }</Button>
+                        <Button onClick={ handleShipmentPayment }>{ `Pay with `+paymentMethod }</Button>
                     </Bottom>
                 </Wrapper>
             </ItemRight> 
@@ -347,6 +343,7 @@ const mapStateToProps = (state) => {
         dropshipFee: state.dropshipFee,
         shipment: state.shipment,
         shipmentFee: state.shipmentFee,
+        deliveryEstimation: state.deliveryEstimation,
         paymentMethod: state.payment,
     }
 }
@@ -356,6 +353,9 @@ const mapDispatchToProps = (dispatch) => {
         shipmentGojek: () => dispatch({ type: 'SHIPMENT_GOJEK' }),
         shipmentJne: () => dispatch({ type: 'SHIPMENT_JNE' }),
         shipmentPersonal: () => dispatch({ type: 'SHIPMENT_PERSONAL' }),
+        paymentEwallet: () => dispatch({ type: 'PAYMENT_EWALLET' }),
+        paymentBankTransfer: () => dispatch({ type: 'PAYMENT_BANK_TRANSFER' }),
+        paymentVa: () => dispatch({ type: 'PAYMENT_VA' }),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Shipment);

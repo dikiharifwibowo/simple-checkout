@@ -12,7 +12,8 @@ const globalState = {
   dropshipFee: '0',
   shipment: false,
   shipmentFee: '0',
-  payment: false
+  deliveryEstimation: '',
+  payment: ''
 }
 //reducer
 const rootReducer = (state = globalState, action) => {
@@ -53,6 +54,7 @@ const rootReducer = (state = globalState, action) => {
       ...state,
       shipment: 'GO SEND',
       shipmentFee: '15,000',
+      deliveryEstimation: 'Today',
     }
   }
   if(action.type==="SHIPMENT_JNE") {
@@ -60,6 +62,7 @@ const rootReducer = (state = globalState, action) => {
       ...state,
       shipment: 'JNE',
       shipmentFee: '9,000',
+      deliveryEstimation: '2 day',
     }
   }
   if(action.type==="SHIPMENT_PERSONAL") {
@@ -67,6 +70,26 @@ const rootReducer = (state = globalState, action) => {
       ...state,
       shipment: 'PERSONAL COURIER',
       shipmentFee: '29,000',
+      deliveryEstimation: '1 day',
+    }
+  }
+  //payment
+  if(action.type==="PAYMENT_EWALLET") {
+    return {
+      ...state,
+      payment: 'e-Wallet'
+    }
+  }
+  if(action.type==="PAYMENT_BANK_TRANSFER") {
+    return {
+      ...state,
+      payment: 'Bank Transfer'
+    }
+  }
+  if(action.type==="PAYMENT_VA") {
+    return {
+      ...state,
+      payment: 'Virtual Account'
     }
   }
   return state;

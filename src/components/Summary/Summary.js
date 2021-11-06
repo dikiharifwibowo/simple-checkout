@@ -141,10 +141,17 @@ const schema = yup.object().shape({
   });
 
 
-const Summary = ({dropshipFee, handleChangePageDelivery}) => {
-    const [courier, setCourier] = useState(false);
-    const [dropshippingFee, setDropshippingFee] = useState("0");
-
+const Summary = ({shipment,shipmentFee, deliveryEstimation, paymentMethod, dropshipFee, handleChangePageDelivery}) => {
+    function commafy( num ) {
+        var str = num.toString().split('.');
+        if (str[0].length >= 5) {
+            str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+        }
+        if (str[1] && str[1].length >= 5) {
+            str[1] = str[1].replace(/(\d{3})/g, '$1 ');
+        }
+        return str.join('.');
+    }
     return (
         <React.Fragment>
             <ItemLeft>
@@ -165,7 +172,10 @@ const Summary = ({dropshipFee, handleChangePageDelivery}) => {
                         <ItemPurchased>10 items purchased</ItemPurchased>
                         <Hr></Hr>
                         <DeliveryEstimation>Delivery Estimation</DeliveryEstimation>
-                        { courier ?  <TimeEstimation>{ courier }</TimeEstimation> : null }
+                        { shipment ?  <TimeEstimation>{ deliveryEstimation +` by `+ shipment}</TimeEstimation> : null }
+                        <Hr></Hr>
+                        <DeliveryEstimation>Payment Method</DeliveryEstimation>
+                        { paymentMethod ?  <TimeEstimation>{paymentMethod}</TimeEstimation> : null }
                     </Top>
                     <Bottom>
                         <Item>
@@ -177,8 +187,12 @@ const Summary = ({dropshipFee, handleChangePageDelivery}) => {
                             <ItemValue>{ dropshipFee }</ItemValue>
                         </Item>
                         <Item>
+                            <ItemName>{ shipment } shipment</ItemName>
+                            <ItemValue>{ shipmentFee }</ItemValue>
+                        </Item>
+                        <Item>
                             <TotalCost marginTop="1rem" marginBottom="1rem">Total</TotalCost>
-                            <TotalCost marginTop="1rem" marginBottom="1rem">{ dropshipFee != 0 ? '5,900' : '5,000' }</TotalCost>
+                            <TotalCost marginTop="1rem" marginBottom="1rem">{ commafy(500000+parseInt(dropshipFee.replace(/,/g, ''))+parseInt(shipmentFee.replace(/,/g, ''))) }</TotalCost>
                         </Item>
                     </Bottom>
                 </Wrapper>
@@ -190,9 +204,12 @@ const Summary = ({dropshipFee, handleChangePageDelivery}) => {
 const mapStateToProps = (state) => {
     return {
         dropshipFee: state.dropshipFee,
+        shipment: state.shipment,
+        shipmentFee: state.shipmentFee,
+        deliveryEstimation: state.deliveryEstimation,
+        paymentMethod: state.payment,
     }
 }
-
 const mapDispatchToProps = (dispatch) => {
     return {
         handleChangePageDelivery: () => dispatch({ type: 'CHANGE_PAGE_DELIVERY' }),
