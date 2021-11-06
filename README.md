@@ -2,6 +2,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+##Keterangan program
+Stack yang digunakan untuk membangun project diantaranya adalah : React-hooks, react-hooks-form, dan styled-components, 
+selain itu ada juga redux untuk state management. anda bisa melihat package.json untuk library yang digunakan.
+
+
 ## Available Scripts
 
 In the project directory, you can run:
