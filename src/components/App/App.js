@@ -34,7 +34,7 @@ class App extends Component {
                 <React.Fragment>
                     <Container>
                         <Navi></Navi>
-                        <BreadCrumbs></BreadCrumbs>
+                        { this.props.page !== 'summary' ? <BreadCrumbs></BreadCrumbs> : null }
                         <Content>
                             { this.props.page === 'delivery' ? <Delivery></Delivery> : null  }
                             { this.props.page === 'shipment' ? <Shipment></Shipment> : null  }

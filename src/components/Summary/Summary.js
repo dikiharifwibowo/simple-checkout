@@ -27,6 +27,7 @@ font-family: Montserrat;
 font-style: normal;
 font-weight: bold;
 font-size: 36px;
+margin-top: ${ props => props.marginTop || '0' };
 line-height: 44px;
 border-bottom: 4px solid #EEEEEE;
 width: 200px;
@@ -58,22 +59,6 @@ font-family: Inter;
 font-size: 14px;
 color: #000000;
 opacity: 0.6;`;
-
-const Button = styled.button`
-background: #FF8A00;
-border: 1px solid rgba(255, 255, 255, 0.2);
-box-sizing: border-box;
-box-shadow: 3px 5px 10px rgba(255, 138, 0, 0.2);
-border-radius: 2px;
-font-family: Inter;
-font-style: normal;
-font-weight: normal;
-font-size: 18px;
-line-height: 22px;
-text-align: center;
-color: #FFFFFF;
-height: 60px;
-width: 100%;`;
 
 const Top = styled.div`
 display:flex;
@@ -152,12 +137,19 @@ const Summary = ({shipment,shipmentFee, deliveryEstimation, paymentMethod, drops
         }
         return str.join('.');
     }
+    function randomString() {
+        let length = 5;
+        let chars = '23456789abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ';
+        var result = '';
+        for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+        return result;
+    }
     return (
         <React.Fragment>
             <ItemLeft>
                 <div>
                     <Heading>Thank You</Heading>
-                    <div>Order ID : <span style={{fontWeight: "bold"}}>asdb1762</span></div>
+                    <div>Order ID : <span style={{fontWeight: "bold"}}> { randomString() }</span></div>
                     <div>Your order will be delivered today with GO-SEND</div>
                     <Link onClick={ handleChangePageDelivery }>
                         <img src={back} alt = "back to cart"></img>
@@ -168,7 +160,7 @@ const Summary = ({shipment,shipmentFee, deliveryEstimation, paymentMethod, drops
             <ItemRight>
                 <Wrapper>
                     <Top>
-                        <Heading>Summary</Heading>
+                        <Heading marginTop="2rem">Summary</Heading>
                         <ItemPurchased>10 items purchased</ItemPurchased>
                         <Hr></Hr>
                         <DeliveryEstimation>Delivery Estimation</DeliveryEstimation>
